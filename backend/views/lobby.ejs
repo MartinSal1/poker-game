@@ -1,0 +1,52 @@
+<html>
+<%- include('partials/head.ejs') %>
+
+<head>
+  <link href="../../stylesheets/lobby.css" rel="stylesheet" type="text/css">
+ 
+</head>  
+<body>
+    <%- include('partials/authenticated_nav.ejs') %>
+        <div class="container">
+          <div class="row">
+            <div class="col-sm">
+
+              <h2>Join Betting Rollers</h2>
+              <% available_tables.forEach(table=> { %>
+
+                <form method="post" action="/api/games/<%= table.id %>/join">
+                  <button type="submit" value="Join Game">
+                    Join Game Room #<%= table.id %>  (<%= table.player_count %> / 4)
+                  </button>
+                </form>
+                <% }) %>
+
+                  <form method="post" action="/api/games/create">
+                    <button type="submit" value="Create New Table">Create New Table</button>
+                  </form>
+
+            </div>
+
+            <div class="grid-container">
+         
+              <div class="col-sm">
+                
+                  <label>
+                    <%- include('partials/chat.ejs') %>
+                  </label>
+
+            </div>
+
+          </div>
+        </div>
+
+        <template id="available-game-item">
+          <div>
+            <li>
+              <a href="#">Join <span>42</span></a>
+            </li>
+          </div>
+        </template>
+  </body>
+
+</html>
